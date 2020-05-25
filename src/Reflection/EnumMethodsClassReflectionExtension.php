@@ -13,7 +13,7 @@ class EnumMethodsClassReflectionExtension implements MethodsClassReflectionExten
 {
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
-        if ($classReflection->isSubclassOf(Enum::class)) {
+        if ($classReflection->isSubclassOf(Enum::class) && ! $classReflection->isAbstract()) {
             $array = $classReflection->getNativeReflection()->getMethod('toArray')->invoke(null);
 
             return array_key_exists($methodName, $array);
